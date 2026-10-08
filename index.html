@@ -70,7 +70,7 @@
                 invoices before payment.
             </p>
 
-          <input type="file" id="invoiceFile"  hidden>
+          <input type="file" id="invoiceFile" hidden onchange="document.getElementById('fileName').innerText='Selected file: ' + this.files[0].name">
             <button id="analyzeBtn">Analyze Invoice</button>
 
 <div id="result"></div>
