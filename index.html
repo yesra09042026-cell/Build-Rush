@@ -70,23 +70,37 @@
                 invoices before payment.
             </p>
 
-          <input type="file" id="invoiceFile" hidden onchange="document.getElementById('fileName').innerText='Selected file: ' + this.files[0].name">
-            <button id="analyzeBtn">Analyze Invoice</button>
+  <input type="file" id="invoiceFile" hidden>
+
+<button type="button" onclick="document.getElementById('invoiceFile').click()">
+    Upload Invoice
+</button>
+
+<p id="fileName">No file selected</p>
+
+<button type="button" id="analyzeBtn">Analyze Invoice</button>
 
 <div id="result"></div>
 
-<button onclick="document.getElementById('invoiceFile').click()">
-    Upload Invoice
-</button>
 <script>
-            document.getElementById("analyzeBtn").addEventListener("click", function () {
-            const file = document.getElementById("invoiceFile").files[0];
-    const result = document.getElementById("result");
+const invoiceFile = document.getElementById("invoiceFile");
+const fileName = document.getElementById("fileName");
+const result = document.getElementById("result");
+const analyzeBtn = document.getElementById("analyzeBtn");
 
-    if (!file) {
-        result.innerHTML = "Please select an invoice first.";
+invoiceFile.addEventListener("change", function () {
+    if (this.files.length > 0) {
+        fileName.innerText = "Selected file: " + this.files[0].name;
+    }
+});
+
+analyzeBtn.addEventListener("click", function () {
+    if (invoiceFile.files.length === 0) {
+        result.innerHTML = "<p>Please select an invoice first.</p>";
         return;
     }
+
+    const file = invoiceFile.files[0];
 
     result.innerHTML = `
         <h3>Invoice Analysis</h3>
@@ -96,16 +110,7 @@
         <p>Risk Status: <strong>LOW RISK</strong></p>
     `;
 });
-<p id="fileName"></p>
-
-<script>
-document.getElementById("invoiceFile").addEventListener("change", function() {
-    if (this.files.length > 0) {
-        document.getElementById("fileName").innerText =
-            "Selected file: " + this.files[0].name;
-    }
-});
-</script>
+</script>     
 
         </div>
 
