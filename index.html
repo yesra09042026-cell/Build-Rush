@@ -70,7 +70,22 @@
                 invoices before payment.
             </p>
 
-            <button>Upload Invoice</button>
+          <input type="file" id="invoiceFile" accept=".pdf,.png,.jpg,.jpeg" hidden>
+
+<button onclick="document.getElementById('invoiceFile').click()">
+    Upload Invoice
+</button>
+
+<p id="fileName"></p>
+
+<script>
+document.getElementById("invoiceFile").addEventListener("change", function() {
+    if (this.files.length > 0) {
+        document.getElementById("fileName").innerText =
+            "Selected file: " + this.files[0].name;
+    }
+});
+</script>
 
         </div>
 
